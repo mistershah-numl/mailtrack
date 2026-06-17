@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EmailTracker</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 350px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: #f9fafb;
+      }
+      .popup-container {
+        padding: 20px;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1f2937;
+      }
+      .header .icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+      .status {
+        padding: 12px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 6px;
+        margin-bottom: 16px;
+        font-size: 13px;
+        color: #1e40af;
+      }
+      .status.logged-out {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #991b1b;
+      }
+      .toggle-section {
+        margin-bottom: 16px;
+      }
+      .toggle-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+      }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #d1d5db;
+        transition: 0.3s;
+        border-radius: 24px;
+      }
+      .slider:before {
+        position: absolute;
+        content: '';
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #3b82f6;
+      }
+      input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+      .button {
+        width: 100%;
+        padding: 10px;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .button:hover {
+        background: #2563eb;
+      }
+      .button.secondary {
+        background: #e5e7eb;
+        color: #1f2937;
+      }
+      .button.secondary:hover {
+        background: #d1d5db;
+      }
+      .button-group {
+        display: flex;
+        gap: 8px;
+      }
+      .button-group .button {
+        flex: 1;
+      }
+      .stats {
+        background: white;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        margin-top: 12px;
+      }
+      .stat-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      .stat-row:last-child {
+        border-bottom: none;
+      }
+      .stat-label {
+        color: #6b7280;
+      }
+      .stat-value {
+        font-weight: 600;
+        color: #1f2937;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="popup-container">
+      <div class="header">
+        <h1>EmailTracker</h1>
+        <div class="icon">E</div>
+      </div>
+
+      <div id="loggedOut" class="status logged-out" style="display: none;">
+        Please sign in to use EmailTracker. <a href="https://emailtracker.app/sign-in" target="_blank" style="color: inherit; text-decoration: underline;">Sign in here</a>
+      </div>
+
+      <div id="loggedIn" style="display: none;">
+        <div class="status">
+          ✓ You are signed in and tracking is active
+        </div>
+
+        <div class="toggle-section">
+          <label class="toggle-label">
+            <span>Enable Tracking</span>
+          </label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="trackingToggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="stats" id="emailStats">
+          <div class="stat-row">
+            <span class="stat-label">Emails Tracked</span>
+            <span class="stat-value" id="emailCount">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Total Opens</span>
+            <span class="stat-value" id="openCount">0</span>
+          </div>
+        </div>
+
+        <div class="button-group" style="margin-top: 16px;">
+          <button class="button secondary" onclick="openDashboard()">Dashboard</button>
+          <button class="button secondary" onclick="signOut()">Sign Out</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
