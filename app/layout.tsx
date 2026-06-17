@@ -16,19 +16,10 @@ export const metadata: Metadata = {
   keywords: ["email tracking", "email analytics", "open tracking", "email extension", "Gmail", "Outlook"],
   authors: [{ name: "EmailTracker" }],
   creator: "EmailTracker",
-  openGraph: {
-    type: "website",
-    title: "EmailTracker | Email Tracking & Analytics",
-    description:
-      "Track email opens, clicks, and engagement with advanced analytics.",
-    url: "https://emailtracker.app",
-    siteName: "EmailTracker",
+  icons: {
+    icon: "/icon-192.png",
+    apple: "/apple-icon.png",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  generator: 'v0.app'
 }
 
 export const viewport: Viewport = {
@@ -43,6 +34,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#3b82f6" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      </head>
       <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   )
